@@ -1,6 +1,7 @@
 import streamlit as st
 import folium
 from streamlit_folium import st_folium
+from GptLoad import openapi
 
 def chat():
     st.header("챗봇과 지도 기능 구현 페이지")
@@ -16,4 +17,22 @@ def chat():
         st_folium(folium_map, height=500)  
 
     with chat_col:  #챗봇에 관한 구현
-        st.write("여기에 챗봇 기능을 구현하세요.")
+        restaurants = ["현대옥", "해이루", "덕천식당"]
+        st.write("전주 " + str(restaurants[0]) + " 만족하시나요 ?")
+        st.write(openapi(restaurants[0]))
+        
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            if st.button("Yes"):
+                st.write("Yes를 선택하셨습니다.")
+                
+        with col2:
+            if st.button("No"):
+                st.write("No를 선택하셨습니다.")
+                st.write(openapi(restaurants[1]))
+
+
+    
+
